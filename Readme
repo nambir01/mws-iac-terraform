@@ -1,0 +1,80 @@
+# MWS Terraform EC2 Setup
+
+This project provisions a secure and monitored EC2 instance on AWS using Terraform, including:
+
+- Custom VPC and private subnet (IPv4 & IPv6)
+- EC2 instance with 8GB gp3 volume and Docker pre-installed
+- Nginx container exposed on UDP port 8000
+- Elastic IP for public access
+- CloudWatch alarms for EBS usage and RAM
+
+---
+
+## Ì¥ß Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/nambir01/mws-iac-terraform.git
+cd mws-iac-terraform
+```
+
+### 2. Update Variables
+Edit `variables.tf` and update:
+- `key_name` with your EC2 key pair
+- `email` with your alert email address
+
+### 3. Deploy Infrastructure
+```bash
+terraform init
+terraform validate
+terraform apply -auto-approve
+```
+
+### 4. Verify Deployment
+After apply completes, check the output `public_ip`:
+```bash
+http://<ElasticIP>:8000
+```
+You should see the Nginx welcome page.
+
+---
+
+## Ì≥à CloudWatch Alerts
+Alarms will trigger and send an email if:
+- EBS volume usage > 20%
+- RAM usage > 80%
+
+Check your email to confirm the SNS subscription.
+
+---
+
+## Ì≤æ Resize EBS Volume (Manual Step)
+
+1. Go to AWS Console ‚Üí EC2 ‚Üí Volumes ‚Üí Modify volume size to 40GB.
+2. SSH into the instance and run:
+```bash
+sudo growpart /dev/xvda 1
+sudo resize2fs /dev/xvda1
+df -h
+```
+
+---
+
+## Ì∑º Cleanup
+To destroy all resources:
+```bash
+terraform destroy -auto-approve
+```
+
+---
+
+## Ì≥Å Files
+- `main.tf` ‚Äì Infrastructure setup
+- `variables.tf` ‚Äì Input variables
+- `outputs.tf` ‚Äì Outputs Elastic IP
+- `userdata.sh` ‚Äì Docker + Nginx install script
+
+---
+
+Created with ‚ù§Ô∏è using Terraform and AWS
+
