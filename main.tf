@@ -65,7 +65,7 @@ resource "aws_security_group" "sg" {
 }
 
 resource "aws_instance" "mws_ec2" {
-  ami                         = "ami-07e7f442e0ecfc0f3"  # Ubuntu 22.04 LTS ap-south-1
+  ami                         = "ami-021a584b49225376d"  # Ubuntu 22.04 LTS ap-south-1
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.mws_subnet.id
   associate_public_ip_address = true
