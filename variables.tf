@@ -11,10 +11,10 @@ variable "volume_size" {
 }
 
 variable "key_name" {
-  default = "your-key-name" # Replace with your key name
+  default = "Chat-gpt-deployment" # Replace with your key name
 }
 
 variable "email" {
-  default = "your@email.com" # Replace with your email
+  default = "eaglenambir@gmail.com" # Replace with your email
 }
 
