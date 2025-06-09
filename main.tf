@@ -128,8 +128,3 @@ resource "aws_sns_topic_subscription" "email_alert" {
   protocol  = "email"
   endpoint  = var.email
 }
-
-output "public_ip" {
-  value = aws_eip.eip.public_ip
-}
-
