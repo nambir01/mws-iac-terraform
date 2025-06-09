@@ -13,7 +13,7 @@ resource "aws_subnet" "mws_subnet" {
   cidr_block                      = "10.0.1.0/24"
   assign_ipv6_address_on_creation = true
   ipv6_cidr_block                 = cidrsubnet(aws_vpc.mws_vpc.ipv6_cidr_block, 8, 0)
-  availability_zone               = "us-east-1a"
+  availability_zone               = "ap-south-1a"
   tags = { Name = "mws-subnet" }
 }
 
